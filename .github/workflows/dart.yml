@@ -15,7 +15,8 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2.11.0
         with:
-          flutter-version: '4.6.2'
+          flutter-version: '3.7.12'  # مثال على إصدار موجود
+          channel: 'stable'
 
       - name: Get dependencies
         run: flutter pub get
