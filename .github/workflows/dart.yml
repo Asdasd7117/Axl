@@ -3,20 +3,20 @@ name: Build Flutter APK
 on:
   push:
     branches:
-      - main
+      - main  # عدل الفرع لو تستخدم فرع مختلف
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2.11.0
         with:
-          flutter-version: '3.7.12'  # مثال على إصدار موجود
-          channel: 'stable'
+          flutter-version: '3.7.12'  # استخدم نسخة Flutter المناسبة لمشروعك
 
       - name: Get dependencies
         run: flutter pub get
@@ -24,7 +24,7 @@ jobs:
       - name: Build APK
         run: flutter build apk --release
 
-      - name: Upload APK
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-release
