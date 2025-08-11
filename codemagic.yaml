@@ -8,7 +8,7 @@ workflows:
         script: flutter create .
       - name: Install dependencies
         script: flutter pub get
-      - name: Build APK
+      - name: Build APK only for Android
         script: flutter build apk --release
       - name: List APK folder to check artifacts
         script: ls -l build/app/outputs/flutter-apk/
