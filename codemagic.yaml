@@ -10,5 +10,7 @@ workflows:
         script: flutter pub get
       - name: Build APK
         script: flutter build apk --release
+      - name: List APK folder to check artifacts
+        script: ls -l build/app/outputs/flutter-apk/
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
