@@ -1,22 +1,32 @@
-name: students_grades
-description: تطبيق لإدارة درجات الطلاب وحساب المجموع والنسبة
-publish_to: "none"
+name: Flutter Build APK
 
-version: 1.0.0+1
+on:
+  push:
+    branches:
+      - main
 
-environment:
-  sdk: ">=2.18.0 <4.0.0"
-  flutter: ">=3.0.0"
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-dependencies:
-  flutter:
-    sdk: flutter
-  shared_preferences: ^2.2.15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^2.0.0
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.2'
+          channel: 'stable'
 
-flutter:
-  uses-material-design: true
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release.apk
+          path: build/app/outputs/flutter-apk/app-release.apk
