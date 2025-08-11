@@ -1,16 +1,17 @@
 workflows:
-  build-apk-no-android-folder:
-    name: Build APK without android folder
+  flutter-android:
+    name: Build Flutter for Android
+    max_build_duration: 60
     environment:
       flutter: stable
     scripts:
-      - name: Create Android folder
-        script: flutter create .
-      - name: Install dependencies
+      - name: Get Flutter packages
         script: flutter pub get
-      - name: Build APK only for Android
+      - name: Clean project
+        script: flutter clean
+      - name: Upgrade Android embedding
+        script: flutter create .
+      - name: Build Android APK
         script: flutter build apk --release
-      - name: List APK folder to check artifacts
-        script: ls -l build/app/outputs/flutter-apk/
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
