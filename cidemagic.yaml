@@ -1,0 +1,14 @@
+workflows:
+  build-apk-no-android-folder:
+    name: Build APK without android folder
+    environment:
+      flutter: stable
+    scripts:
+      - name: Create Android folder
+        script: flutter create .
+      - name: Install dependencies
+        script: flutter pub get
+      - name: Build APK
+        script: flutter build apk --release
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
